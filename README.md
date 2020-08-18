@@ -22,16 +22,16 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0x2:  11101010    #  EA  #  bze A
 0x3:  00101101    #  2D  #  add D
 0x4:  11001011    #  CB  #  sw B
-0x5:  10101110    #  AE  #  
-0x6:  00101100    #
-0x7:  11001110    #
-0x8:  10100000    #
-0x9:  11100001    #
-0xA:  00000000    #
-0xB:  00000011    #
-0xC:  00000110    #
-0xD:  11111111    #
-0xE:  00000000    #
+0x5:  10101110    #  AE  #  lw E 
+0x6:  00101100    #  2C  #  add C
+0x7:  11001110    #  CE  #  sw E
+0x8:  10100000    #  A0  #  lw 0
+0x9:  11100001    #  E1  #  bze 1 
+0xA:  00000000    #  00  #  halt
+0xB:  00000011    #  01  #  dato
+0xC:  00000110    #  06  #  dato
+0xD:  11111111    #  FF  #  dato
+0xE:  00000000    #  00  #  dato
 ```
 
 2. Consideren el siguiente _hexdump_ de la memoria de TOY-8. O sea un volcado de la memoria en hexadecimal. ¿Cuántos programas distintos pueden encontrar? Indicar cuáles bytes interpretan como instrucciones y cuáles como datos.
@@ -43,6 +43,11 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0xc   00 FF 01 00
 ```
 
+```
+0x0   00000000  10101010   00100110   11000111
+0x4   00000000
+
+```
 3. Para el primer programa del ejercicio anterior. ¿Qué líneas de control se activan para cada instrucción? ¿Cuál es el valor del bus de datos y de instrucciones en cada instrucción? Completen la siguiente tabla, agreguen las filas que sean necesarias.
 
 |Instrucción|Reloj|Control|Data bus|Address Bus|
@@ -54,15 +59,15 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 4. El siguiente programa suma los números que encuentra en la entrada hasta que aparece un cero, y luego envía el resultado a la salida. Traducirlo a ensamblador y a C siguiendo el ejemplo de las primeras dos líneas.
 
 ```
-0x1:  A0   #  lw 0  #
-0x2:  CE   #  sw E  #  int sum = 0;
-0x3:  AF
-0x4:  E9
-0x5:  2E
-0x6:  CE
-0x7:  A0
-0x8:  E3
-0x9:  AE
+0x1:  A0  #  lw 0  #
+0x2:  CE  #  sw E  #  int sum = 0;
+0x3:  AF  #  
+0x4:  E9  # 
+0x5:  2E  #
+0x6:  CE  #
+0x7:  A0  #
+0x8:  E3  #
+0x9:  AE  # 
 0xA:  CF
 0xB:  00
 ```
