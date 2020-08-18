@@ -19,10 +19,10 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 
 ```
 0x1:  10101011    #  AB  #  lw B
-0x2:  11101010    #
-0x3:  00101101    #
-0x4:  11001011    #
-0x5:  10101110    #
+0x2:  11101010    #  EA  #  bze A
+0x3:  00101101    #  2D  #  add D
+0x4:  11001011    #  CB  #  sw B
+0x5:  10101110    #  AE  #  
 0x6:  00101100    #
 0x7:  11001110    #
 0x8:  10100000    #
