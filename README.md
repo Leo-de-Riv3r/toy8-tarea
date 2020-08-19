@@ -31,7 +31,7 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0xB:  00000011    #  03  #  dato
 0xC:  00000110    #  06  #  dato
 0xD:  11111111    #  FF  #  dato
-0xE:  00000000    #  00  #  halt  
+0xE:  00000000    #  00  #  halt              
 ```
 
 2. Consideren el siguiente _hexdump_ de la memoria de TOY-8. O sea un volcado de la memoria en hexadecimal. ¿Cuántos programas distintos pueden encontrar? Indicar cuáles bytes interpretan como instrucciones y cuáles como datos.
@@ -45,7 +45,7 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 
 ```
 0x0   00000000(instruccion)  10100101(instruccion)  00100110(instruccion)  11000111(instruccion)
-0x4   00000000(instruccion)  00001000(dato)  00000101(dato)  00000000(instruccion) 
+0x4   00000000(instruccion)  00001000(dato)         00000101(dato)  00000000(instruccion) 
 0x8   10100111(instruccion)  01101101(instruccion)  00101110(instruccion)  11000111(instruccion)
 0xc   00000000(instruccion)  11111111(instruccion)  00000001(dato)  00000000(instruccion)
 ```
