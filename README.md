@@ -31,7 +31,7 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0xB:  00000011    #  03  #  dato
 0xC:  00000110    #  06  #  dato
 0xD:  11111111    #  FF  #  dato
-0xE:  00000000    #  00  #  halt              
+0xE:  00000000    #  00  #  halt              El valor del programa
 ```
 
 2. Consideren el siguiente _hexdump_ de la memoria de TOY-8. O sea un volcado de la memoria en hexadecimal. ¿Cuántos programas distintos pueden encontrar? Indicar cuáles bytes interpretan como instrucciones y cuáles como datos.
@@ -43,7 +43,9 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0xc   00 FF 01 00
 ```
 
-```
+```  
+Hay 2 programas distintos
+
 0x0   00000000(instruccion)  10100101(instruccion)  00100110(instruccion)  11000111(instruccion)
 0x4   00000000(instruccion)  00001000(dato)         00000101(dato)  00000000(instruccion) 
 0x8   10100111(instruccion)  01101101(instruccion)  00101110(instruccion)  11000111(instruccion)
@@ -60,17 +62,17 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 4. El siguiente programa suma los números que encuentra en la entrada hasta que aparece un cero, y luego envía el resultado a la salida. Traducirlo a ensamblador y a C siguiendo el ejemplo de las primeras dos líneas.
 
 ```
-0x1:  A0  #  lw 0  #
+0x1:  A0  #  lw 0  #  
 0x2:  CE  #  sw E  #  int sum = 0;
-0x3:  AF  #  lw F  #  
-0x4:  E9  #  bze 9 #  
-0x5:  2E  #  add E # 
-0x6:  CE  #  sw E  # 
-0x7:  A0  #  lw 0  # 
-0x8:  E3  #  bze 3 # 
-0x9:  AE  #  lw 0  # 
-0xA:  CF  #  sw F  #  
-0xB:  00  #  dato  #  printf("Result: %i", sum);
+0x3:  AF  #  lw F  #  tag1:
+0x4:  E9  #  bze 9 #  if (sum == 0) { goto tag2 }
+0x5:  2E  #  add E #  sum += 14;
+0x6:  CE  #  sw E  #  int E = sum;
+0x7:  A0  #  lw 0  #  sum = 0;
+0x8:  E3  #  bze 3 #  if (sum == 0) { goto tag1 } 
+0x9:  AE  #  lw 0  #  tag2: sum = 0
+0xA:  CF  #  sw F  #  int F = sum;
+0xB:  00  #  halt  #  return 0;
 ```
 
 5. Una mejora que le podríamos hacer a esta computadora es duplicar la cantidad de memoria, pasar de 16 bytes a 32 bytes. ¿Cómo lo harían manteniendo la longitud de las instrucciones en 8 bits? ¿Qué partes de la CPU habría que modificar y cómo?
