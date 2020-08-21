@@ -31,7 +31,9 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 0xB:  00000011    #  03  #  dato
 0xC:  00000110    #  06  #  dato
 0xD:  11111111    #  FF  #  dato
-0xE:  00000000    #  00  #  halt              El valor del programa
+0xE:  00000000    #  00  #  halt  
+
+Cuando finaliza el programa 0xE tiene 12 como valor, si 0xE es el resultado del programa el programa no finaliza y se sigue haciendo el salto de 0x9 a 0x1 hasta que 0xE tenga como valor un numero diferente a 0
 ```
 
 2. Consideren el siguiente _hexdump_ de la memoria de TOY-8. O sea un volcado de la memoria en hexadecimal. ¿Cuántos programas distintos pueden encontrar? Indicar cuáles bytes interpretan como instrucciones y cuáles como datos.
@@ -44,7 +46,7 @@ Tienen un emulador de la computadora y el circuito para el Logisim en el [blog](
 ```
 
 ```  
-Hay 2 programas distintos
+Hay 4 programas distintos
 
 0x0   00000000(instruccion)  10100101(instruccion)  00100110(instruccion)  11000111(instruccion)
 0x4   00000000(instruccion)  00001000(dato)         00000101(dato)  00000000(instruccion) 
@@ -57,21 +59,25 @@ Hay 2 programas distintos
 |-----------|-----|--------------|--------|-----------|
 |A5         |0    |IR en         |A5      |1          |
 |A5         |1    |R en, addr mux|08      |5          |
-|26         |0    |              |        |           |
+|26         |0    |IR en         |        |           |
+|26         |1    |R en, add 6   |        |           |            
+|C7         |0    |IR en         |        |           |           
+|C7         |1    |R en, sw 7    |        |           | 
+|00         |0    |IR en 00      |5       |7 
 
 4. El siguiente programa suma los números que encuentra en la entrada hasta que aparece un cero, y luego envía el resultado a la salida. Traducirlo a ensamblador y a C siguiendo el ejemplo de las primeras dos líneas.
 
 ```
 0x1:  A0  #  lw 0  #  
 0x2:  CE  #  sw E  #  int sum = 0;
-0x3:  AF  #  lw F  #  tag1:
-0x4:  E9  #  bze 9 #  if (sum == 0) { goto tag2 }
-0x5:  2E  #  add E #  sum += 14;
-0x6:  CE  #  sw E  #  int E = sum;
+0x3:  AF  #  lw F  #  line3: 
+0x4:  E9  #  bze 9 #  if (sum ==0) { goto line9 }
+0x5:  2E  #  add E #  sum +=E;
+0x6:  CE  #  sw E  #  int AdresssE = sum;
 0x7:  A0  #  lw 0  #  sum = 0;
-0x8:  E3  #  bze 3 #  if (sum == 0) { goto tag1 } 
-0x9:  AE  #  lw 0  #  tag2: sum = 0
-0xA:  CF  #  sw F  #  int F = sum;
+0x8:  E3  #  bze 3 #  if (sum == 0) { goto line3 }
+0x9:  AE  #  lw 0  #  line9: sum = 0;
+0xA:  CF  #  sw F  #  int AdresssF = sum;
 0xB:  00  #  halt  #  return 0;
 ```
 
